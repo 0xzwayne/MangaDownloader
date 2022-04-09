@@ -1,3 +1,8 @@
 # MangaDownloader
-Tool to download bulk scans and read mangas without ads \n
+Tool to download bulk scans and read mangas without ads
+
+
+
+
+
 currently only support french scan site
