@@ -21,8 +21,7 @@ def input_numberonly(text):
     except:
         print("choix incorrect, entrez un nombre")
         return input_numberonly(text)
-    else:
-        return i
+    return i
     
 def choix_manga() -> str:
     """
