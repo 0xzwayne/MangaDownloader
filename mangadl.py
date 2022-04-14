@@ -61,4 +61,5 @@ if __name__ == "__main__":
     manga_name = choix_manga()
     start = input("chapitre de debut >> ")
     end = input("chapitre de fin >> ")
+    #test
     main(manga_name, int(start), int(end))
