@@ -36,12 +36,12 @@ class downloader:
             numero_chapitre = url.split("/")[5]
             #print(numero_chapitre)
             self.downloading = numero_chapitre
+            print(Fore.RED + f"Telechargement du chapitre {self.manga.name} {self.downloading}...", end="\r")
             
-            threading.Thread(target=self.displayupdate, daemon=True).start()
+            """ threading.Thread(target=self.displayupdate, daemon=True).start() """
             
             #on telecharge les liens des images pour chaque page du tome
             urls = await downloader.fetchurls(url)
-            
             page=1
             for url in urls:
                #page = int(url.split("/")[8].split(".")[0])
@@ -55,11 +55,10 @@ class downloader:
 
 
     async def fetchimage(self, chapter, page, url):
-        async with httpx.AsyncClient() as cl:
+        async with httpx.AsyncClient(verify=False, follow_redirects=True) as cl:
             #print(url)
             rep:httpx.Response = await cl.get(url)
-            img = rep.read()
-            await cl.aclose()
+            img = await rep.aread()
             async with aiofiles.open(f"{self.dlpath}\{chapter}_{page}.jpg", 'wb+') as f:
                 await f.write(img)
             
@@ -91,11 +90,11 @@ class downloader:
                 ...
         return urls
     
-    def displayupdate(self):
+    """ def displayupdate(self):
         print(end='\r')
         while self.downloading != None:
             print(Fore.RED + f"Telechargement du chapitre {self.manga.name} {self.downloading}...", end="\r")
-            sleep(1)
+            sleep(1) """
         
         
         
